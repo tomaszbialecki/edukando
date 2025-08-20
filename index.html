@@ -783,11 +783,22 @@
                 // honeypot check
                 if (form.website.value !== "") return;
 
+                const data = {
+                    name: form.name.value,
+                    email: form.email.value,
+                    phone: form.phone.value,
+                    message: form.message.value
+                };
+
                 fetch(scriptURL, {
-                        method: "POST",
-                        body: new FormData(form),
-                    })
-                    .then(() => {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+
+                .then(() => {
                         successMessage.textContent = "Wiadomość wysłana!";
                         form.reset();
                     })
