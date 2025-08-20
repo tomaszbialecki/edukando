@@ -1,2 +1,2 @@
-# zapisy-edukando
+#edukando
 Edukando webside in development. 
