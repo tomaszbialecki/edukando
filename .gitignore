@@ -1,0 +1,22 @@
+# systemowe śmieci
+.DS_Store
+Thumbs.db
+
+# pliki VSCode i inne edytory
+.vscode/
+*.code-workspace
+
+# zależności (jeśli użyjesz npm)
+node_modules/
+
+# pliki tymczasowe, buildy, środowiska
+*.log
+dist/
+build/
+.env
+
+# backupy, cache
+*.bak
+*.tmp
+.cache/
+
