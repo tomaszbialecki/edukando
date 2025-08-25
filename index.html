@@ -691,18 +691,20 @@
                 <h2 class="section-title">Zapisz dziecko</h2>
                 <div class="contact-wrap">
                     <div class="card">
-                        <form id="contact-form" action="#" method="POST">
-                            <input type="text" name="name" placeholder="Imię i nazwisko" required />
-                            <input type="email" name="email" placeholder="E-mail" required />
-                            <input type="tel" name="phone" placeholder="Telefon" required />
-                            <textarea name="message" rows="5"
-                                placeholder="Wiadomość (np. zapis na półkolonie/korepetycje)" required></textarea>
-                            <input type="text" name="website" style="display:none">
-                            <!-- honeypot -->
-                            <button type="submit">Wyślij zgłoszenie</button>
-                            <p class="feed-note" id="success-message"></p>
-                            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+                        <form id="contact-form">
+                            <input type="text" name="name" placeholder="Imię" required />
+                            <input type="email" name="email" placeholder="Email" required />
+                            <input type="tel" name="phone" placeholder="Telefon" />
+                            <textarea name="message" placeholder="Wiadomość" required></textarea>
+                          
+                            <!-- Honeypot -->
+                            <input type="text" name="website" style="display:none" />
+                          
+                            <button type="submit">Wyślij</button>
                         </form>
+                          
+                          <p id="success-message"></p>
+                          
                     </div>
                     <div class="card">
                         <h3>Kontakt</h3>
@@ -827,34 +829,38 @@
             console.log('Loaded sections (with end):', sections.length);
         });
     </script>
+
     <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwto0xQiHmgAj-mnbyf5VDZNf6w1ymKNAwqHDA4I6D5EqWMyAGrWTfGILH16eeFrKWm/exec"; // <-- Twój URL
-        const form = document.getElementById("contact-form");
-        const successMessage = document.getElementById("success-message");
-      
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-      
-          if (form.website.value !== "") return;
-      
-          const formData = new URLSearchParams(new FormData(form));
-      
-          fetch(scriptURL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: formData
-          })
-          .then(() => {
-            successMessage.textContent = "Wiadomość wysłana!";
-            form.reset();
-          })
-          .catch(() => {
-            successMessage.textContent = "Błąd. Spróbuj ponownie.";
-          });
-        });
-      </script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwto0xQiHmgAj-mnbyf5VDZNf6w1ymKNAwqHDA4I6D5EqWMyAGrWTfGILH16eeFrKWm/exec"; // <-- Twój adres z Apps Script
+  const form = document.getElementById("contact-form");
+  const successMessage = document.getElementById("success-message");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Honeypot check
+    if (form.website.value !== "") return;
+
+    const formData = new FormData(form);
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: formData,
+    })
+    .then((response) => {
+      if (response.ok) {
+        successMessage.textContent = "Wiadomość wysłana!";
+        form.reset();
+      } else {
+        throw new Error("Błąd");
+      }
+    })
+    .catch(() => {
+      successMessage.textContent = "Błąd. Spróbuj ponownie.";
+    });
+  });
+</script>
+
       
 </body>
 
