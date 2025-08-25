@@ -838,27 +838,32 @@
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Honeypot check
     if (form.website.value !== "") return;
+
+    // Blokujemy przycisk i pokazujemy "ładowanie"
+    const submitBtn = form.querySelector("button[type='submit']");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Wysyłanie...";
 
     const formData = new FormData(form);
 
     fetch(scriptURL, {
-      method: "POST",
-      body: formData,
+        method: "POST",
+        body: formData
     })
-    .then((response) => {
-      if (response.ok) {
-        successMessage.textContent = "Wiadomość wysłana!";
+    .then(() => {
+        successMessage.textContent = "Wiadomość została wysłana!";
         form.reset();
-      } else {
-        throw new Error("Błąd");
-      }
     })
     .catch(() => {
-      successMessage.textContent = "Błąd. Spróbuj ponownie.";
+        successMessage.textContent = "Błąd. Spróbuj ponownie.";
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Wyślij";
     });
-  });
+});
+
 </script>
 
       
