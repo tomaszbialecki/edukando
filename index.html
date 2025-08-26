@@ -446,6 +446,32 @@
             color: var(--primary);
         }
 
+        /* Ikony w kartach */
+        .card .icon {
+            width: 96px;
+            /* możesz zmienić np. na 84/112px */
+            height: 96px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            /* wyłącz tło jeśli było */
+            font-size: 0;
+            /* żeby nie zostawiło odstępu po starym znaku */
+        }
+
+        .card .icon img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* zachowaj proporcje PNG */
+            border-radius: 12px;
+            /* opcjonalnie miękkie rogi */
+        }
+
+
         /* ============ Why / Social / Opinions ============ */
 
         .why p {
@@ -571,46 +597,63 @@
         </section>
 
         <!-- OFERTA -->
-        <section id="oferta">
-            <div class="container">
-                <h2 class="section-title">Nasza oferta</h2>
-                <div class="grid grid-3">
-                    <div class="card">
-                        <div class="icon">A</div>
-                        <h3>Korepetycje</h3>
-                        <p>Indywidualnie i w małych grupach. Matematyka, polski, języki, przyroda – dostosowane do
-                            poziomu ucznia.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon">☀</div>
-                        <h3>Półkolonie</h3>
-                        <p>Kreatywne turnusy pełne nauki przez zabawę. Opieka, zajęcia tematyczne, ruch i eksperymenty.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <div class="icon">🧪</div>
-                        <h3>Warsztaty</h3>
-                        <p>Programowanie, eksperymenty, rękodzieło, języki — rozwijamy ciekawość i kompetencje
-                            przyszłości.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon">🎓</div>
-                        <h3>Egzaminy</h3>
-                        <p>Przygotowanie do egzaminów (ósmoklasisty, matura). Strategie, arkusze, pewność siebie.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon">🎉</div>
-                        <h3>Urodzinki</h3>
-                        <p>Urodziny tematyczne z motywem naukowym lub artystycznym. Zabawa + edukacja w jednym.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon">🌙</div>
-                        <h3>Nocowanki</h3>
-                        <p>Bezpieczne nocne wydarzenia integracyjne — kino, gry, warsztaty, wspólne śniadanie.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- OFERTA -->
+<section id="oferta">
+  <div class="container">
+    <h2 class="section-title">Nasza oferta</h2>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="icon">
+          <img src="assets/icons/book.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
+        <h3>Korepetycje</h3>
+        <p>Indywidualnie i w małych grupach. Matematyka, polski, języki, przyroda – dostosowane do poziomu ucznia.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">
+          <img src="assets/icons/sun.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
+        <h3>Półkolonie</h3>
+        <p>Kreatywne turnusy pełne nauki przez zabawę. Opieka, zajęcia tematyczne, ruch i eksperymenty.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">
+          <img src="assets/icons/brush.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
+        <h3>Warsztaty</h3>
+        <p>Programowanie, eksperymenty, rękodzieło, języki — rozwijamy ciekawość i kompetencje przyszłości.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">
+          <img src="assets/icons/cap.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
+        <h3>Egzaminy</h3>
+        <p>Przygotowanie do egzaminów (ósmoklasisty, matura). Strategie, arkusze, pewność siebie.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">
+          <img src="assets/icons/balloon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
+        <h3>Urodzinki</h3>
+        <p>Urodziny tematyczne z motywem naukowym lub artystycznym. Zabawa + edukacja w jednym.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">
+          <img src="assets/icons/moon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </div>
+        <h3>Nocowanki</h3>
+        <p>Bezpieczne nocne wydarzenia integracyjne — kino, gry, warsztaty, wspólne śniadanie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         <!-- Z ŻYCIA: FEED FB/IG -->
         <section id="zycie">
@@ -696,15 +739,15 @@
                             <input type="email" name="email" placeholder="Email" required />
                             <input type="tel" name="phone" placeholder="Telefon" />
                             <textarea name="message" placeholder="Wiadomość" required></textarea>
-                          
+
                             <!-- Honeypot -->
                             <input type="text" name="website" style="display:none" />
-                          
+
                             <button type="submit">Wyślij</button>
                         </form>
-                          
-                          <p id="success-message"></p>
-                          
+
+                        <p id="success-message"></p>
+
                     </div>
                     <div class="card">
                         <h3>Kontakt</h3>
@@ -714,7 +757,10 @@
                         <p><strong>Adres:</strong> os. Mielżyńskiego 137/2 Swarzedz, Poland</p>
                         <div style="margin-top:10px;overflow:hidden;border-radius:12px">
                             <!-- TODO: podmień osadzenie mapy -->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.4626539911733!2d17.06107384127473!3d52.398290745349605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47045947b74ead6f%3A0x3bbf1f6e9ac0beb8!2sOsiedle%20Miel%C5%BCy%C5%84skiego%20137%2F2%2C%2062-020%20Swarz%C4%99dz!5e0!3m2!1spl!2spl!4v1756146528810!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.4626539911733!2d17.06107384127473!3d52.398290745349605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47045947b74ead6f%3A0x3bbf1f6e9ac0beb8!2sOsiedle%20Miel%C5%BCy%C5%84skiego%20137%2F2%2C%2062-020%20Swarz%C4%99dz!5e0!3m2!1spl!2spl!4v1756146528810!5m2!1spl!2spl"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
                     </div>
@@ -828,42 +874,42 @@
     </script>
 
     <script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbwto0xQiHmgAj-mnbyf5VDZNf6w1ymKNAwqHDA4I6D5EqWMyAGrWTfGILH16eeFrKWm/exec"; // <-- Twój adres z Apps Script
-  const form = document.getElementById("contact-form");
-  const successMessage = document.getElementById("success-message");
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwto0xQiHmgAj-mnbyf5VDZNf6w1ymKNAwqHDA4I6D5EqWMyAGrWTfGILH16eeFrKWm/exec"; // <-- Twój adres z Apps Script
+        const form = document.getElementById("contact-form");
+        const successMessage = document.getElementById("success-message");
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-    if (form.website.value !== "") return;
+            if (form.website.value !== "") return;
 
-    // Blokujemy przycisk i pokazujemy "ładowanie"
-    const submitBtn = form.querySelector("button[type='submit']");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Wysyłanie...";
+            // Blokujemy przycisk i pokazujemy "ładowanie"
+            const submitBtn = form.querySelector("button[type='submit']");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Wysyłanie...";
 
-    const formData = new FormData(form);
+            const formData = new FormData(form);
 
-    fetch(scriptURL, {
-        method: "POST",
-        body: formData
-    })
-    .then(() => {
-        successMessage.textContent = "Wiadomość została wysłana!";
-        form.reset();
-    })
-    .catch(() => {
-        successMessage.textContent = "Błąd. Spróbuj ponownie.";
-    })
-    .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Wyślij";
-    });
-});
+            fetch(scriptURL, {
+                method: "POST",
+                body: formData
+            })
+                .then(() => {
+                    successMessage.textContent = "Wiadomość została wysłana!";
+                    form.reset();
+                })
+                .catch(() => {
+                    successMessage.textContent = "Błąd. Spróbuj ponownie.";
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Wyślij";
+                });
+        });
 
-</script>
+    </script>
 
-      
+
 </body>
 
 </html>
