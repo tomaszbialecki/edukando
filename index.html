@@ -553,6 +553,11 @@
     </style>
 
 <body>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v21.0"
+></script>
+
     <header>
         <div class="container nav">
             <a href="#start" class="brand">
@@ -657,27 +662,31 @@
 
 
         <!-- Z ŻYCIA: FEED FB/IG -->
-        <section id="zycie">
-            <div class="container">
-                <h2 class="section-title">Z życia Edukando</h2>
-                <div class="card">
-                    <!-- FACEBOOK PAGE PLUGIN (auto-aktualizacja) -->
-                    <!-- TODO: podmień href na adres ich strony na FB -->
-                    <div id="fb-root"></div>
-                    <script async defer crossorigin="anonymous"
-                        src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v19.0" nonce="edukando"></script>
-                    <div class="fb-page" data-href="https://www.facebook.com/NazwaWaszejStrony" data-tabs="timeline"
-                        data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true"
-                        data-hide-cover="false" data-show-facepile="false">
-                        <blockquote cite="https://www.facebook.com/NazwaWaszejStrony" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/NazwaWaszejStrony">Edukando</a>
-                        </blockquote>
-                    </div>
-                </div>
-                <p class="feed-note">Postują przez Meta Business Suite → trafia na Facebook i Instagram; strona pokazuje
-                    najnowsze wpisy automatycznie.</p>
-            </div>
-        </section>
+
+<!-- Sekcja z widgetem -->
+<section id="z-zycia-edukando" style="padding: 2rem 0; background: #f9f9f9;">
+  <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1.5rem;">Z życia Edukando</h2>
+
+  <div style="display: flex; justify-content: center;">
+    <div class="fb-page"
+      data-href="https://www.facebook.com/edukandocentrumedukacyjne"  <!-- PODMIEN TUTAJ -->
+      data-tabs="timeline"
+      data-width="1000"
+      data-height="600"
+      data-small-header="false"
+      data-adapt-container-width="true"
+      data-hide-cover="false"
+      data-show-facepile="false"
+      style="max-width: 100%; width: 100%;">
+      <blockquote
+        cite="https://www.facebook.com/edukandocentrumedukacyjne"     <!-- PODMIEN TUTAJ -->
+        class="fb-xfbml-parse-ignore">
+        <a href="https://www.facebook.com/edukandocentrumedukacyjne">Edukando</a>  <!-- PODMIEN TUTAJ -->
+      </blockquote>
+    </div>
+  </div>
+</section>
+
 
         <!-- DLACZEGO MY -->
         <section id="dlaczego">
