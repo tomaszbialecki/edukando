@@ -554,9 +554,8 @@
 
 <body>
     <div id="fb-root"></div>
-<script async defer crossorigin="anonymous"
-  src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v21.0"
-></script>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v21.0"></script>
 
     <header>
         <div class="container nav">
@@ -601,38 +600,100 @@
 
         </section>
 
-      <section id="z-zycia" class="section">
+        <!-- OFERTA -->
+
+        <section id="oferta">
+            <div class="container">
+                <h2 class="section-title">Nasza oferta</h2>
+
+                <div class="grid grid-3">
+                    <div class="card">
+                        <div class="icon">
+                            <img src="book.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Korepetycje</h3>
+                        <p>Indywidualnie i w małych grupach. Matematyka, polski, języki, przyroda – dostosowane do
+                            poziomu ucznia.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">
+                            <img src="sun.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Półkolonie</h3>
+                        <p>Kreatywne turnusy pełne nauki przez zabawę. Opieka, zajęcia tematyczne, ruch i eksperymenty.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">
+                            <img src="brush.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Warsztaty</h3>
+                        <p>Programowanie, eksperymenty, rękodzieło, języki — rozwijamy ciekawość i kompetencje
+                            przyszłości.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">
+                            <img src="cap.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Egzaminy</h3>
+                        <p>Przygotowanie do egzaminów (ósmoklasisty, matura). Strategie, arkusze, pewność siebie.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">
+                            <img src="balloon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Urodzinki</h3>
+                        <p>Urodziny tematyczne z motywem naukowym lub artystycznym. Zabawa + edukacja w jednym.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">
+                            <img src="moon.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Nocowanki</h3>
+                        <p>Bezpieczne nocne wydarzenia integracyjne — kino, gry, warsztaty, wspólne śniadanie.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Z ŻYCIA: FEED FB/IG -->
+
+        <section id="zycie">
   <div class="container">
     <h2 class="section-title">Z życia Edukando</h2>
-    
-    <div class="grid grid-2" style="align-items: flex-start; gap: 2rem;">
-      <!-- Miejsce na grafikę po lewej -->
-      <div class="graphic-box">
-        <img src="assets/images/zycie-edukando.jpg" alt="Z życia Edukando" style="width: 100%; border-radius: 12px;">
-      </div>
 
-      <!-- Widżet Facebooka po prawej -->
-      <div style="max-width: 500px;">
-        <div class="fb-page"
-          data-href="https://www.facebook.com/edukandocentrumedukacyjne"
-          data-tabs="timeline"
-          data-width="500"
-          data-height="600"
-          data-small-header="false"
-          data-adapt-container-width="false"
-          data-hide-cover="false"
-          data-show-facepile="false"
-          style="width: 100%;">
-          <blockquote
-            cite="https://www.facebook.com/edukandocentrumedukacyjne"
-            class="fb-xfbml-parse-ignore">
-            <a href="https://www.facebook.com/edukandocentrumedukacyjne">Edukando Centrum Edukacyjne</a>
-          </blockquote>
-        </div>
+    <div style="display: flex; justify-content: center; align-items: flex-end; flex-wrap: wrap; gap: 40px; margin-top: 40px;">
+      <img src="zycie-edukando.png" alt="Sowa z aparatem" style="max-width: 300px; height: auto;">
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+        <iframe 
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fedukandocentrumedukacyjne&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+          width="340"
+          height="500"
+          style="border:none;overflow:hidden"
+          scrolling="no"
+          frameborder="0"
+          allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+        </iframe>
+        
+        <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
+           style="padding: 10px 20px; background-color: #4666aa; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 500;">
+          Zobacz więcej na Facebooku
+        </a>
       </div>
     </div>
   </div>
 </section>
+
+
 
         <!-- DLACZEGO MY -->
         <section id="dlaczego">
