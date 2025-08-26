@@ -597,7 +597,7 @@
         </section>
 
         <!-- OFERTA -->
-         <!-- OFERTA -->
+        
 <section id="oferta">
   <div class="container">
     <h2 class="section-title">Nasza oferta</h2>
@@ -658,25 +658,27 @@
 
         <!-- Z ŻYCIA: FEED FB/IG -->
         <section id="zycie">
-            <div class="container">
-                <h2 class="section-title">Z życia Edukando</h2>
-                <div class="card">
-                    <!-- FACEBOOK PAGE PLUGIN (auto-aktualizacja) -->
-                    <!-- TODO: podmień href na adres ich strony na FB -->
-                    <div id="fb-root"></div>
-                    <script async defer crossorigin="anonymous"
-                        src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v19.0" nonce="edukando"></script>
-                    <div class="fb-page" data-href="https://www.facebook.com/NazwaWaszejStrony" data-tabs="timeline"
-                        data-width="500" data-height="" data-small-header="false" data-adapt-container-width="true"
-                        data-hide-cover="false" data-show-facepile="false">
-                        <blockquote cite="https://www.facebook.com/NazwaWaszejStrony" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/NazwaWaszejStrony">Edukando</a>
-                        </blockquote>
-                    </div>
-                </div>
-                <p class="feed-note">Postują przez Meta Business Suite → trafia na Facebook i Instagram; strona pokazuje
-                    najnowsze wpisy automatycznie.</p>
-            </div>
+            <!-- raz po <body> -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v21.0"
+></script>
+
+<!-- miejsce, gdzie chcesz widżet -->
+<div class="fb-page"
+  data-href="https://www.facebook.com/EDUKANDO_PAGE_URL"
+  data-tabs="timeline"
+  data-width="500"
+  data-height=""
+  data-small-header="false"
+  data-adapt-container-width="true"
+  data-hide-cover="false"
+  data-show-facepile="true">
+  <blockquote cite="https://www.facebook.com/EDUKANDO_PAGE_URL" class="fb-xfbml-parse-ignore">
+    <a href="https://www.facebook.com/EDUKANDO_PAGE_URL">Edukando</a>
+  </blockquote>
+</div>
+
         </section>
 
         <!-- DLACZEGO MY -->
