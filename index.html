@@ -673,7 +673,10 @@
             <div class="container">
                 <h2 class="section-title">Z życia Edukando</h2>
                 <div id="zycie-slider" style="overflow:hidden; position:relative;">
-                    <!-- bsidlka zdjęć -->
+                    <div class="grid grid-3" id="gallery-grid">
+                        <p>Wczytywanie zdjęć...</p>
+                      </div>
+                      
                 </div>
                 <div style="text-align:center; margin-top:1rem;">
                     <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
@@ -888,7 +891,7 @@
     </script>
 
     <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbxNjXIx4mVqGD8pMoldvo2wCUFmHNx5yvePmtm50grBqsEDtbPSuI5anBWF6Kjij7aZ/exec"; // <-- Twój adres z Apps Script
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec"; // <-- Twój adres z Apps Script
         const form = document.getElementById("contact-form");
         const successMessage = document.getElementById("success-message");
 
@@ -973,7 +976,36 @@
         });
       });
     </script>
-    
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec"; // ← podmień na swój
+      
+        fetch(API_URL)
+          .then(response => response.json())
+          .then(data => {
+            const grid = document.getElementById("gallery-grid");
+            grid.innerHTML = "";
+      
+            data.forEach(item => {
+              const card = document.createElement("div");
+              card.className = "card";
+      
+              const img = document.createElement("img");
+              img.src = item.url;
+              img.alt = item.alt;
+              img.loading = "lazy";
+              img.style.width = "100%";
+              img.style.borderRadius = "12px";
+      
+              card.appendChild(img);
+              grid.appendChild(card);
+            });
+          })
+          .catch(error => {
+            console.error("Błąd ładowania galerii:", error);
+            document.getElementById("gallery-grid").innerHTML = "<p>Nie udało się wczytać zdjęć.</p>";
+          });
+      </script>
+      
 
 
 
