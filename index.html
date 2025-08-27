@@ -971,6 +971,19 @@
             .catch(err => {
                 console.error("Błąd ładowania galerii:", err);
             });
+            .then(data => {
+                const slider = document.getElementById("zycie-slider");
+                data.forEach(item => {
+                    const img = document.createElement("img");
+                    img.src = item.url;
+                    img.alt = item.alt || "";
+                    img.style.maxWidth = "200px";
+                    img.style.borderRadius = "12px";
+                    img.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+                    slider.appendChild(img);
+                });
+            });
+
     </script>
 
 
