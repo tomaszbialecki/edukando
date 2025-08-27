@@ -965,7 +965,7 @@
         const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
       
         fetch(API_URL)
-          .then(response => response.json())
+          .then(res => res.json())
           .then(data => {
             const grid = document.getElementById("gallery-grid");
             grid.innerHTML = "";
@@ -976,7 +976,7 @@
               card.style.overflow = "hidden";
       
               const img = document.createElement("img");
-              img.src = item.url;
+              img.src = item.url; // 👈👈 TO JEST KLUCZOWE
               img.alt = "Z życia Edukando";
               img.loading = "lazy";
               img.style.width = "100%";
@@ -988,11 +988,11 @@
               grid.appendChild(card);
             });
           })
-          .catch(error => {
-            console.error("Błąd ładowania galerii:", error);
-            document.getElementById("gallery-grid").innerHTML = "<p>Nie udało się wczytać zdjęć.</p>";
+          .catch(err => {
+            console.error("Błąd ładowania galerii:", err);
           });
       </script>
+      
       
       
       
