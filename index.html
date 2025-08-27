@@ -925,41 +925,6 @@
         });
 
     </script>
-    <script>
-        (async () => {
-            const res = await fetch("TU_TWÓJ_RSS_FETCHRSS.xml");
-            const txt = await res.text();
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(txt, "text/xml");
-            const items = xml.querySelectorAll("item");
-            const slider = document.getElementById("zycie-slider");
-
-            if (!items.length) {
-                slider.innerText = "Brak aktualnych postów.";
-                return;
-            }
-
-            items.forEach((item, idx) => {
-                const link = item.querySelector("link")?.textContent || "#";
-                const imgUrl = item.querySelector("enclosure")?.getAttribute("url") || "";
-                const div = document.createElement("div");
-                div.style = `min-width:100%; display:inline-block;`;
-                div.innerHTML = imgUrl ?
-                    `<a href="${link}" target="_blank"><img src="${imgUrl}" alt="" style="width:100%;height:auto;"></a>` :
-                    `<div style="padding:2rem; text-align:center;">Brak zdjęcia</div>`;
-                slider.appendChild(div);
-            });
-
-            // Prosta auto-scroll co 3s:
-            let pos = 0;
-            setInterval(() => {
-                pos++;
-                slider.scrollTo({ left: slider.clientWidth * pos, behavior: "smooth" });
-                if (pos >= items.length) pos = 0;
-            }, 3000);
-        })();
-    </script>
-
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
@@ -995,8 +960,6 @@
             });
 
     </script>
-
-
 
 
 
