@@ -962,21 +962,6 @@
     <div id="gallery"></div>
 
     <script>
-    fetch("https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec")
-      .then(response => response.json())
-      .then(data => {
-        const gallery = document.getElementById("gallery");
-        data.forEach(item => {
-          const img = document.createElement("img");
-          img.src = item.url;
-          img.alt = item.alt;
-          img.style.width = "200px"; // lub własny styl
-          img.style.margin = "10px";
-          gallery.appendChild(img);
-        });
-      });
-    </script>
-    <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec"; // ← podmień na swój
       
         fetch(API_URL)
