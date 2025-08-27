@@ -957,19 +957,24 @@
         })();
     </script>
     <script>
-        fetch("https://script.google.com/macros/s/AKfycbxNjXIx4mVqGD8pMoldvo2wCUFmHNx5yvePmtm50grBqsEDtbPSuI5anBWF6Kjij7aZ/exec") // <- Twój działający link
-          .then(res => res.json())
-          .then(images => {
-            const gallery = document.getElementById('gallery');
-            images.forEach(img => {
-              const el = document.createElement('img');
-              el.src = img.url;
-              el.alt = img.alt;
-              el.loading = 'lazy';
-              el.style.width = "100%";
-              gallery.appendChild(el);
-            });
-          });
+     fetch("https://script.google.com/macros/s/AKfycbxNjXIx4mVqGD8pMoldvo2wCUFmHNx5yvePmtm50grBqsEDtbPSuI5anBWF6Kjij7aZ/exec")
+  .then(res => res.json())
+  .then(images => {
+    console.log("📷 Otrzymane dane z Apps Script:", images);
+    const gallery = document.getElementById('gallery');
+    images.forEach(img => {
+      const el = document.createElement('img');
+      el.src = img.url;
+      el.alt = img.alt;
+      el.loading = 'lazy';
+      el.style.width = "100%";
+      gallery.appendChild(el);
+    });
+  })
+  .catch(err => {
+    console.error("❌ Błąd pobierania galerii:", err);
+  });
+
         </script>
         
         <div id="gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;"></div>
