@@ -671,21 +671,21 @@
 
         <section id="zycie">
             <div class="container">
-                <h2 class="section-title">Z życia Edukando</h2>
-                <div id="gallery-grid" style="overflow:hidden; position:relative;">
-                    <div class="grid grid-3" id="gallery-grid">
-                        <p>Wczytywanie zdjęć...</p>
-                      </div>
-                      
-                </div>
-                <div style="text-align:center; margin-top:1rem;">
-                    <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
-                        style="background:#4267B2;color:#fff;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;">
-                        Zobacz więcej na Facebooku
-                    </a>
-                </div>
+              <h2 class="section-title">Z życia Edukando</h2>
+          
+              <div id="gallery-grid" class="grid grid-3" style="gap: 20px;">
+                <!-- zdjęcia załadują się tu dynamicznie -->
+              </div>
+          
+              <div style="text-align:center; margin-top:1rem;">
+                <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
+                  style="background:#4267B2;color:#fff;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;">
+                  Zobacz więcej na Facebooku
+                </a>
+              </div>
             </div>
-        </section>
+          </section>
+          
 
 
         <!-- DLACZEGO MY -->
@@ -962,7 +962,7 @@
     <div id="gallery"></div>
 
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec"; // ← podmień na swój
+        const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
       
         fetch(API_URL)
           .then(response => response.json())
@@ -973,13 +973,16 @@
             data.forEach(item => {
               const card = document.createElement("div");
               card.className = "card";
+              card.style.overflow = "hidden";
       
               const img = document.createElement("img");
               img.src = item.url;
-              img.alt = item.alt;
+              img.alt = item.alt || "Zdjęcie z życia Edukando";
               img.loading = "lazy";
               img.style.width = "100%";
               img.style.borderRadius = "12px";
+              img.style.display = "block";
+              img.style.objectFit = "cover";
       
               card.appendChild(img);
               grid.appendChild(card);
@@ -990,6 +993,7 @@
             document.getElementById("gallery-grid").innerHTML = "<p>Nie udało się wczytać zdjęć.</p>";
           });
       </script>
+      
       
 
 
