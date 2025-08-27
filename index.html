@@ -926,43 +926,41 @@
 
     </script>
 
-    <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
 
-        fetch(API_URL)
-            .then(res => res.json())
-            .then(data => {
-                console.log("Dane z API:", data); // 👈 sprawdź w konsoli!
-
-                const grid = document.getElementById("gallery-grid");
-                grid.innerHTML = "";
-
-                data.forEach(item => {
-                    const card = document.createElement("div");
-                    card.className = "card";
-                    card.style.overflow = "hidden";
-
-                    const img = document.createElement("img");
-                    img.src = item.webContentLink || `https://drive.google.com/uc?export=view&id=${item.id}`;
-                    img.alt = "Z życia Edukando";
-                    img.loading = "lazy";
-                    img.style.width = "100%";
-                    img.style.borderRadius = "12px";
-                    img.style.display = "block";
-                    img.style.objectFit = "cover";
-
-                    card.appendChild(img);
-                    grid.appendChild(card);
-                });
-            })
-            .catch(err => {
-                console.error("Błąd ładowania galerii:", err);
-            });
-
-    </script>
-
-
-
+<script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
+  
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        console.log("🔍 Co przyszło z API:", data); // zostaw na chwilę do testów
+  
+        const grid = document.getElementById("gallery-grid");
+        grid.innerHTML = "";
+  
+        data.forEach(item => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.style.overflow = "hidden";
+  
+          const img = document.createElement("img");
+          img.src = item.url;
+          img.alt = "Z życia Edukando";
+          img.loading = "lazy";
+          img.style.width = "100%";
+          img.style.borderRadius = "12px";
+          img.style.display = "block";
+          img.style.objectFit = "cover";
+  
+          card.appendChild(img);
+          grid.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error("Błąd ładowania galerii:", err);
+      });
+  </script>
+  
 
 
 </body>
