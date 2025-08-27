@@ -933,33 +933,38 @@
     fetch(API_URL)
       .then(res => res.json())
       .then(data => {
-        console.log("🔍 Co przyszło z API:", data); // zostaw na chwilę do testów
-  
-        const grid = document.getElementById("gallery-grid");
-        grid.innerHTML = "";
+        const slider = document.getElementById("zycie-slider");
+        slider.innerHTML = ""; // Usuwa stare divy tekstowe
   
         data.forEach(item => {
           const card = document.createElement("div");
           card.className = "card";
           card.style.overflow = "hidden";
+          card.style.borderRadius = "12px";
+          card.style.boxShadow = "0 4px 10px rgba(0,0,0,0.05)";
+          card.style.margin = "8px";
+          card.style.display = "inline-block";
+          card.style.width = "300px"; // lub inny rozmiar
+          card.style.verticalAlign = "top";
   
           const img = document.createElement("img");
           img.src = item.url;
-          img.alt = "Z życia Edukando";
+          img.alt = item.alt || "Z życia Edukando";
           img.loading = "lazy";
           img.style.width = "100%";
-          img.style.borderRadius = "12px";
           img.style.display = "block";
           img.style.objectFit = "cover";
+          img.style.borderRadius = "12px";
   
           card.appendChild(img);
-          grid.appendChild(card);
+          slider.appendChild(card);
         });
       })
       .catch(err => {
         console.error("Błąd ładowania galerii:", err);
       });
   </script>
+  
   
 
 
