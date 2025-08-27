@@ -554,6 +554,14 @@
                 scroll-behavior: auto;
             }
         }
+
+        #zycie-slider {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 1.5rem;
+        }
     </style>
 
 <body>
@@ -927,45 +935,45 @@
     </script>
 
 
-<script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
-  
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(data => {
-        const slider = document.getElementById("zycie-slider");
-        slider.innerHTML = ""; // Usuwa stare divy tekstowe
-  
-        data.forEach(item => {
-          const card = document.createElement("div");
-          card.className = "card";
-          card.style.overflow = "hidden";
-          card.style.borderRadius = "12px";
-          card.style.boxShadow = "0 4px 10px rgba(0,0,0,0.05)";
-          card.style.margin = "8px";
-          card.style.display = "inline-block";
-          card.style.width = "300px"; // lub inny rozmiar
-          card.style.verticalAlign = "top";
-  
-          const img = document.createElement("img");
-          img.src = item.url;
-          img.alt = item.alt || "Z życia Edukando";
-          img.loading = "lazy";
-          img.style.width = "100%";
-          img.style.display = "block";
-          img.style.objectFit = "cover";
-          img.style.borderRadius = "12px";
-  
-          card.appendChild(img);
-          slider.appendChild(card);
-        });
-      })
-      .catch(err => {
-        console.error("Błąd ładowania galerii:", err);
-      });
-  </script>
-  
-  
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
+
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => {
+                const slider = document.getElementById("zycie-slider");
+                slider.innerHTML = ""; // Usuwa stare divy tekstowe
+
+                data.forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "card";
+                    card.style.overflow = "hidden";
+                    card.style.borderRadius = "12px";
+                    card.style.boxShadow = "0 4px 10px rgba(0,0,0,0.05)";
+                    card.style.margin = "8px";
+                    card.style.display = "inline-block";
+                    card.style.width = "300px"; // lub inny rozmiar
+                    card.style.verticalAlign = "top";
+
+                    const img = document.createElement("img");
+                    img.src = item.url;
+                    img.alt = item.alt || "Z życia Edukando";
+                    img.loading = "lazy";
+                    img.style.width = "100%";
+                    img.style.display = "block";
+                    img.style.objectFit = "cover";
+                    img.style.borderRadius = "12px";
+
+                    card.appendChild(img);
+                    slider.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error("Błąd ładowania galerii:", err);
+            });
+    </script>
+
+
 
 
 </body>
