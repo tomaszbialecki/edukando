@@ -956,29 +956,24 @@
             }, 3000);
         })();
     </script>
-    <script>
-     fetch("https://script.google.com/macros/s/AKfycbxNjXIx4mVqGD8pMoldvo2wCUFmHNx5yvePmtm50grBqsEDtbPSuI5anBWF6Kjij7aZ/exec")
-  .then(res => res.json())
-  .then(images => {
-    console.log("📷 Otrzymane dane z Apps Script:", images);
-    const gallery = document.getElementById('gallery');
-    images.forEach(img => {
-      const el = document.createElement('img');
-      el.src = img.url;
-      el.alt = img.alt;
-      el.loading = 'lazy';
-      el.style.width = "100%";
-      gallery.appendChild(el);
-    });
-  })
-  .catch(err => {
-    console.error("❌ Błąd pobierania galerii:", err);
-  });
+    <div id="gallery"></div>
 
-        </script>
-        
-        <div id="gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;"></div>
-        
+    <script>
+    fetch("https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec")
+      .then(response => response.json())
+      .then(data => {
+        const gallery = document.getElementById("gallery");
+        data.forEach(item => {
+          const img = document.createElement("img");
+          img.src = item.url;
+          img.alt = item.alt;
+          img.style.width = "200px"; // lub własny styl
+          img.style.margin = "10px";
+          gallery.appendChild(img);
+        });
+      });
+    </script>
+    
 
 
 
