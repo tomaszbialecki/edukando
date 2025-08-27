@@ -671,21 +671,21 @@
 
         <section id="zycie">
             <div class="container">
-              <h2 class="section-title">Z życia Edukando</h2>
-          
-              <div id="gallery-grid" class="grid grid-3" style="gap: 20px;">
-                <!-- zdjęcia załadują się tu dynamicznie -->
-              </div>
-          
-              <div style="text-align:center; margin-top:1rem;">
-                <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
-                  style="background:#4267B2;color:#fff;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;">
-                  Zobacz więcej na Facebooku
-                </a>
-              </div>
+                <h2 class="section-title">Z życia Edukando</h2>
+
+                <div id="gallery-grid" class="grid grid-3" style="gap: 20px;">
+                    <!-- zdjęcia załadują się tu dynamicznie -->
+                </div>
+
+                <div style="text-align:center; margin-top:1rem;">
+                    <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
+                        style="background:#4267B2;color:#fff;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;">
+                        Zobacz więcej na Facebooku
+                    </a>
+                </div>
             </div>
-          </section>
-          
+        </section>
+
 
 
         <!-- DLACZEGO MY -->
@@ -959,44 +959,46 @@
             }, 3000);
         })();
     </script>
-    <div id="gallery-grid" class="grid grid-3" style="gap: 20px;"></div>
 
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbyKVtsyiYbM4cAb64bSVuz2n3mofQ-U8IjhdMMEJRzHtjrXVZOcLazM6b7ys7od3a8f/exec";
-      
+
         fetch(API_URL)
-          .then(res => res.json())
-          .then(data => {
-            const grid = document.getElementById("gallery-grid");
-            grid.innerHTML = "";
-      
-            data.forEach(item => {
-              const card = document.createElement("div");
-              card.className = "card";
-              card.style.overflow = "hidden";
-      
-              const img = document.createElement("img");
-              img.src = item.url; // 👈👈 TO JEST KLUCZOWE
-              img.alt = "Z życia Edukando";
-              img.loading = "lazy";
-              img.style.width = "100%";
-              img.style.borderRadius = "12px";
-              img.style.display = "block";
-              img.style.objectFit = "cover";
-      
-              card.appendChild(img);
-              grid.appendChild(card);
+            .then(res => res.json())
+            .then(data => {
+                console.log("Dane z API:", data); // 👈 sprawdź w konsoli!
+
+                const grid = document.getElementById("gallery-grid");
+                grid.innerHTML = "";
+
+                data.forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "card";
+                    card.style.overflow = "hidden";
+
+                    const img = document.createElement("img");
+                    img.src = item.webContentLink || `https://drive.google.com/uc?export=view&id=${item.id}`;
+                    img.alt = "Z życia Edukando";
+                    img.loading = "lazy";
+                    img.style.width = "100%";
+                    img.style.borderRadius = "12px";
+                    img.style.display = "block";
+                    img.style.objectFit = "cover";
+
+                    card.appendChild(img);
+                    grid.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error("Błąd ładowania galerii:", err);
             });
-          })
-          .catch(err => {
-            console.error("Błąd ładowania galerii:", err);
-          });
-      </script>
-      
-      
-      
-      
+
+    </script>
+
+
+
+
 
 
 
