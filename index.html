@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ============ Tokens & global ============ */
 
@@ -157,7 +158,6 @@
         }
 
         /* ============ Hero ============ */
-        /* ========== HERO (clean) ========== */
 
         :root {
             --cue-size: 64px;
@@ -176,6 +176,11 @@
 
         .hero>div:first-child {
             padding-inline: 20px;
+            transform: translateY(-30px);
+        }
+
+        .hero .hero-image img {
+            transform: translateY(-30px);
         }
 
         .hero h1 {
@@ -666,19 +671,19 @@
         <!-- Z ŻYCIA: FEED FB/IG -->
 
         <section id="zycie">
-  <div class="container">
-    <h2 class="section-title">Z życia Edukando</h2>
-    <div id="zycie-slider" style="overflow:hidden; position:relative;">
-      <!-- bsidlka zdjęć -->
-    </div>
-    <div style="text-align:center; margin-top:1rem;">
-      <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
-         style="background:#4267B2;color:#fff;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;">
-        Zobacz więcej na Facebooku
-      </a>
-    </div>
-  </div>
-</section>
+            <div class="container">
+                <h2 class="section-title">Z życia Edukando</h2>
+                <div id="zycie-slider" style="overflow:hidden; position:relative;">
+                    <!-- bsidlka zdjęć -->
+                </div>
+                <div style="text-align:center; margin-top:1rem;">
+                    <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank"
+                        style="background:#4267B2;color:#fff;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;">
+                        Zobacz więcej na Facebooku
+                    </a>
+                </div>
+            </div>
+        </section>
 
 
         <!-- DLACZEGO MY -->
@@ -776,12 +781,19 @@
         <div class="container" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
             <div>© <span id="y"></span> Edukando</div>
             <div>
-                <a href="#oferta">Oferta</a> ·
+                <a href="https://www.facebook.com/edukandocentrumedukacyjne" target="_blank" rel="noopener">
+                    <i class="fab fa-facebook" style="font-size:20px;"></i>
+                </a>
+                <a href="https://www.instagram.com/edukando.swarzedz/" target="_blank" rel="noopener">
+                    <i class="fab fa-instagram" style="font-size:20px;"></i>
+                </a>
+                · <a href="#oferta">Oferta</a> ·
                 <a href="#kontakt">Kontakt</a> ·
                 <a href="polityka-prywatnosci.html">Polityka prywatności</a>
             </div>
         </div>
     </footer>
+
 
     <script>
         document.getElementById('y').textContent = new Date().getFullYear();
@@ -912,39 +924,39 @@
 
     </script>
     <script>
-(async () => {
-  const res = await fetch("TU_TWÓJ_RSS_FETCHRSS.xml");
-  const txt = await res.text();
-  const parser = new DOMParser();
-  const xml = parser.parseFromString(txt, "text/xml");
-  const items = xml.querySelectorAll("item");
-  const slider = document.getElementById("zycie-slider");
+        (async () => {
+            const res = await fetch("TU_TWÓJ_RSS_FETCHRSS.xml");
+            const txt = await res.text();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(txt, "text/xml");
+            const items = xml.querySelectorAll("item");
+            const slider = document.getElementById("zycie-slider");
 
-  if (!items.length) {
-    slider.innerText = "Brak aktualnych postów.";
-    return;
-  }
+            if (!items.length) {
+                slider.innerText = "Brak aktualnych postów.";
+                return;
+            }
 
-  items.forEach((item, idx) => {
-    const link = item.querySelector("link")?.textContent || "#";
-    const imgUrl = item.querySelector("enclosure")?.getAttribute("url") || "";
-    const div = document.createElement("div");
-    div.style = `min-width:100%; display:inline-block;`;
-    div.innerHTML = imgUrl ?
-      `<a href="${link}" target="_blank"><img src="${imgUrl}" alt="" style="width:100%;height:auto;"></a>` :
-      `<div style="padding:2rem; text-align:center;">Brak zdjęcia</div>`;
-    slider.appendChild(div);
-  });
+            items.forEach((item, idx) => {
+                const link = item.querySelector("link")?.textContent || "#";
+                const imgUrl = item.querySelector("enclosure")?.getAttribute("url") || "";
+                const div = document.createElement("div");
+                div.style = `min-width:100%; display:inline-block;`;
+                div.innerHTML = imgUrl ?
+                    `<a href="${link}" target="_blank"><img src="${imgUrl}" alt="" style="width:100%;height:auto;"></a>` :
+                    `<div style="padding:2rem; text-align:center;">Brak zdjęcia</div>`;
+                slider.appendChild(div);
+            });
 
-  // Prosta auto-scroll co 3s:
-  let pos = 0;
-  setInterval(() => {
-    pos++;
-    slider.scrollTo({ left: slider.clientWidth * pos, behavior: "smooth" });
-    if (pos >= items.length) pos = 0;
-  }, 3000);
-})();
-</script>
+            // Prosta auto-scroll co 3s:
+            let pos = 0;
+            setInterval(() => {
+                pos++;
+                slider.scrollTo({ left: slider.clientWidth * pos, behavior: "smooth" });
+                if (pos >= items.length) pos = 0;
+            }, 3000);
+        })();
+    </script>
 
 
 
