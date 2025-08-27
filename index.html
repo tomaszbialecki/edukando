@@ -176,11 +176,10 @@
 
         .hero>div:first-child {
             padding-inline: 20px;
-            transform: translateY(-30px);
         }
 
         .hero .hero-image img {
-            transform: translateY(-30px);
+            transform: translateY(-40px);
         }
 
         .hero h1 {
@@ -889,7 +888,7 @@
     </script>
 
     <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwto0xQiHmgAj-mnbyf5VDZNf6w1ymKNAwqHDA4I6D5EqWMyAGrWTfGILH16eeFrKWm/exec"; // <-- Twój adres z Apps Script
+        const scriptURL = "https://script.google.com/macros/s/AKfycbxNjXIx4mVqGD8pMoldvo2wCUFmHNx5yvePmtm50grBqsEDtbPSuI5anBWF6Kjij7aZ/exec"; // <-- Twój adres z Apps Script
         const form = document.getElementById("contact-form");
         const successMessage = document.getElementById("success-message");
 
@@ -957,6 +956,24 @@
             }, 3000);
         })();
     </script>
+    <script>
+        fetch("https://script.google.com/macros/s/AKfycbxNjXIx4mVqGD8pMoldvo2wCUFmHNx5yvePmtm50grBqsEDtbPSuI5anBWF6Kjij7aZ/exec") // <- Twój działający link
+          .then(res => res.json())
+          .then(images => {
+            const gallery = document.getElementById('gallery');
+            images.forEach(img => {
+              const el = document.createElement('img');
+              el.src = img.url;
+              el.alt = img.alt;
+              el.loading = 'lazy';
+              el.style.width = "100%";
+              gallery.appendChild(el);
+            });
+          });
+        </script>
+        
+        <div id="gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;"></div>
+        
 
 
 
