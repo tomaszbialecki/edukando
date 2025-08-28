@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="stylesheet" href="style.css">
+
     <style>
         /* ============ Tokens & global ============ */
 
@@ -34,6 +37,17 @@
             --cue-icon: 32px;
         }
 
+        body {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .4s ease;
+        }
+
+        body.loaded {
+            visibility: visible;
+            opacity: 1;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -51,6 +65,12 @@
             background: var(--bg);
             overflow-x: hidden;
             /* anty poziomy scroll */
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("Inter.woff2") format("woff2");
+            font-display: swap;
         }
 
         img,
@@ -999,6 +1019,11 @@
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) modal.classList.add('hidden');
             });
+        });
+    </script>
+    <script>
+        window.addEventListener("load", () => {
+            document.body.classList.add("loaded");
         });
     </script>
 
