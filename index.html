@@ -952,12 +952,12 @@
         const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec";
         const form = document.getElementById("contact-form");
         const successMessage = document.getElementById("success-message");
-
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
             if (form.website.value !== "") return;
 
+            // Blokujemy przycisk i pokazujemy "ładowanie"
             const submitBtn = form.querySelector("button[type='submit']");
             submitBtn.disabled = true;
             submitBtn.textContent = "Wysyłanie...";
@@ -968,14 +968,9 @@
                 method: "POST",
                 body: formData
             })
-                .then(response => response.json()) // << TU CZYTASZ JSON z backendu
-                .then(data => {
-                    if (data.duplicate) {
-                        successMessage.textContent = "Ta wiadomość została już wysłana.";
-                    } else {
-                        successMessage.textContent = "Wiadomość została wysłana!";
-                        form.reset();
-                    }
+                .then(() => {
+                    successMessage.textContent = "Wiadomość została wysłana!";
+                    form.reset();
                 })
                 .catch(() => {
                     successMessage.textContent = "Błąd. Spróbuj ponownie.";
@@ -985,6 +980,8 @@
                     submitBtn.textContent = "Wyślij";
                 });
         });
+
+
 
     </script>
 
