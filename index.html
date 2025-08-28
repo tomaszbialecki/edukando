@@ -12,221 +12,94 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ============ Tokens & global ============ */
-
-        :root {
-            --primary: #0fb9b1;
-            /* turkus */
-            --accent: #f7b731;
-            /* żółty */
-            --dark: #0c1b33;
-            /* granat */
-            --text: #222;
-            --muted: #666;
-            --bg: #ffffff;
-            --card: #f7f9fc;
-            --radius: 16px;
-            --shadow: 0 6px 20px rgba(0, 0, 0, .08);
-            --nav-h: 88px;
-            /* wysokość sticky headera (dopasuj do realnej) */
-            /* strzałka (scroll cue) – desktop */
-            --cue-size: 64px;
-            --cue-icon: 32px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Poppins, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-            color: var(--text);
-            background: var(--bg);
-            overflow-x: hidden;
-            /* anty poziomy scroll */
-        }
-
-        img,
-        svg {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
-
-        a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        /* offset kotwic pod sticky header */
-
-        main section {
-            scroll-margin-top: calc(var(--nav-h) + 16px);
-        }
-
-        /* kontener */
-
-        .container {
-            max-width: 1800px;
-            margin: 0 auto;
-            padding-inline: 12px;
-        }
-
-        /* ============ Header / Nav ============ */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: #fff;
-            border-bottom: 1px solid #eef1f5;
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: var(--nav-h);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--dark);
-        }
-
-        .brand img {
-            height: calc(var(--nav-h) - 24px);
-        }
-
-        /* logo dopasowane do paska */
-
-        .nav-links {
-            display: flex;
-            gap: 18px;
-        }
-
-        .nav-links a {
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .mobile-toggle {
-            display: none;
-        }
-
-        @media (max-width:840px) {
-            .nav-links {
-                display: none;
-            }
-
-            .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                position: absolute;
-                top: var(--nav-h);
-                left: 0;
-                width: 100%;
-                background: #fff;
-                padding: 12px 20px;
-                border-top: 1px solid #eef1f5;
-            }
-
-            .mobile-toggle {
-                display: block;
-                border: 0;
-                background: transparent;
-                font-size: 28px;
-            }
-
-            body.no-scroll {
-                overflow: hidden;
-            }
-
-            /* gdy otwarte mobilne menu */
-        }
-
-        /* ============ Hero ============ */
-
+        /* =========================
+   VARIABLES (zostaw jak masz w :root)
+   ========================= */
         :root {
             --cue-size: 64px;
             --cue-icon: 32px;
+            /* zakładam, że masz też:
+     --nav-h, --muted, --primary, --shadow
+  */
         }
 
-        /* ========== HERO ========== */
-
+        /* =========================
+   HERO — MOBILE FIRST (≤600px)
+   ========================= */
         .hero {
             position: relative;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            min-height: calc(100vh - var(--nav-h));
+            padding: 24px 16px 56px;
+            gap: 20px;
         }
 
         .hero>div:first-child {
-            padding-inline: 20px;
-        }
-
-        .hero .hero-image img {
-            transform: translateY(-40px);
+            padding-inline: 0;
         }
 
         .hero h1 {
-            font-size: 38px;
-            line-height: 1.15;
-            margin: 0 0 14px;
+            font-size: clamp(24px, 7vw, 32px);
+            line-height: 1.2;
+            margin: 0 0 10px;
         }
 
         .hero p {
             color: var(--muted);
-            margin: 0 0 24px;
+            margin: 8px 0 18px;
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 380px;
         }
 
         .cta {
             display: inline-block;
             background: var(--primary);
             color: #fff;
-            padding: 14px 20px;
+            padding: 14px 22px;
             border-radius: 999px;
             font-weight: 700;
             box-shadow: var(--shadow);
         }
 
-        .hero-image img {
+        .hero-image {
+            width: 100%;
+            max-width: 420px;
             margin: 0 auto;
-            max-width: 900px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-height: 260px;
+            object-fit: contain;
+            margin: 0 auto;
         }
 
         /* Scroll cue (strzałka) */
-
         .hero .scroll-cue {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            bottom: 32px;
-            width: var(--cue-size);
+            bottom: 16px;
+
+            width: 48px;
             aspect-ratio: 1;
             display: grid;
             place-items: center;
+
             border-radius: 999px;
             background: #fff;
             box-shadow: 0 6px 24px rgba(0, 0, 0, .12);
         }
 
         .hero .scroll-cue svg {
-            width: var(--cue-icon);
-            height: var(--cue-icon);
+            width: 24px;
+            height: 24px;
             animation: cueBounce 1.8s infinite;
         }
 
@@ -242,157 +115,128 @@
             }
         }
 
-        /* ========== DESKTOP ========== */
-
-        @media (min-width: 841px) {
-            .hero {
-                min-height: calc(100vh - var(--nav-h));
-                min-block-size: calc(100svh - var(--nav-h));
-                padding-block: clamp(72px, 10vh, 120px) 96px;
-            }
-        }
-
-        /* ========== MOBILE ========== */
-
-        @media (max-width: 840px) {
-            .hero {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                min-height: calc(100vh - var(--nav-h));
-                padding-top: 24px;
-                /* zamiast calc(var(--nav-h) + 8px) */
-                padding-bottom: 48px;
-                gap: 22px;
-            }
-
-            .hero-image {
-                width: 100%;
-                max-width: 440px;
-                /* było 360 */
-                margin: 0 auto;
-            }
-
-            .hero-image img {
-                width: 100%;
-                max-height: 260px;
-                /* było 220 */
-                object-fit: contain;
-            }
-
-            .hero h1 {
-                font-size: clamp(26px, 7vw, 36px);
-                /* większy */
-                margin: 0;
-            }
-
-            .hero p {
-                margin: 10px 0 18px;
-                font-size: 16px;
-                line-height: 1.5;
-                max-width: 380px;
-            }
-
-            .cta {
-                margin-bottom: 8px;
-                font-size: 16px;
-                padding: 16px 24px;
-                /* większy przycisk */
-            }
-
-            .hero .scroll-cue {
-                bottom: 12px;
-                width: 48px;
-                height: 48px;
-            }
-
-            .hero .scroll-cue svg {
-                width: 24px;
-                height: 24px;
-            }
-
-            /* ========== TABLET ========== */
-            @media (max-width: 375px) {
-                .hero h1 {
-                    font-size: 24px;
-                }
-
-                .hero p {
-                    font-size: 15px;
-                }
-
-                .cta {
-                    font-size: 15px;
-                }
-            }
-        }
-
+        /* =========================
+   SMALL TABLET (601–840px)
+   ========================= */
         @media (min-width: 601px) and (max-width: 840px) {
             .hero {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                min-height: calc(100vh - var(--nav-h));
-                padding: 48px 24px;
-                text-align: center;
-                gap: 32px;
+                padding: 48px 24px 72px;
+                gap: 28px;
             }
 
             .hero h1 {
-                font-size: clamp(28px, 5vw, 38px);
-                line-height: 1.2;
+                font-size: clamp(28px, 5.5vw, 36px);
                 margin-bottom: 12px;
             }
 
             .hero p {
-                font-size: 18px;
+                font-size: 17px;
                 max-width: 560px;
-                margin: 0 auto 24px;
-                color: var(--muted);
+                margin: 0 auto 22px;
+            }
+
+            .cta {
+                font-size: 17px;
+                padding: 16px 28px;
+            }
+
+            .hero-image {
+                max-width: 520px;
+            }
+
+            .hero .scroll-cue {
+                bottom: 24px;
+                width: 56px;
+            }
+
+            .hero .scroll-cue svg {
+                width: 26px;
+                height: 26px;
+            }
+        }
+
+        /* =========================
+   DESKTOP (≥841px)
+   ========================= */
+        @media (min-width: 841px) {
+            .hero {
+                display: grid;
+                grid-template-columns: 1.2fr 1fr;
+                align-items: center;
+                gap: 20px;
+
+                min-height: calc(100vh - var(--nav-h));
+                min-block-size: calc(100svh - var(--nav-h));
+                padding-block: clamp(72px, 10vh, 120px) 96px;
+                text-align: left;
+            }
+
+            .hero>div:first-child {
+                padding-inline: 20px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+                line-height: 1.15;
+                margin: 0 0 14px;
+            }
+
+            .hero p {
+                margin: 0 0 24px;
+                font-size: 18px;
+                line-height: 1.6;
+                max-width: 640px;
             }
 
             .cta {
                 font-size: 18px;
                 padding: 16px 32px;
-                border-radius: 999px;
             }
 
             .hero-image {
-                max-width: 90vw;
                 width: 100%;
             }
 
             .hero-image img {
-                width: 100%;
+                max-width: 900px;
+                margin: 0 auto;
                 height: auto;
+                /* przesunięcie TYLKO na desktopie */
+                transform: translateY(-40px);
             }
 
-            .scroll-cue {
-                position: absolute;
+            .hero .scroll-cue {
                 bottom: 32px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 64px;
-                height: 64px;
-                background: white;
-                border-radius: 999px;
-                box-shadow: var(--shadow);
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                width: var(--cue-size);
             }
 
-            .scroll-cue svg {
-                width: 28px;
-                height: 28px;
+            .hero .scroll-cue svg {
+                width: var(--cue-icon);
+                height: var(--cue-icon);
             }
         }
 
-        /* ============ Sections / grids ============ */
+        /* =========================
+   VERY SMALL (≤375px)
+   — odseparowane, bez zagnieżdżania
+   ========================= */
+        @media (max-width: 375px) {
+            .hero h1 {
+                font-size: 22px;
+            }
 
+            .hero p {
+                font-size: 15px;
+            }
+
+            .cta {
+                font-size: 15px;
+            }
+        }
+
+        /* =========================
+   SECTIONS / GRIDS
+   ========================= */
         section {
             padding-block: 56px;
         }
@@ -419,139 +263,13 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        @media (max-width:840px) {
+        /* Stack na mobile i małych tabletach */
+        @media (max-width: 840px) {
 
             .grid-2,
             .grid-3,
             .grid-4 {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        /* ============ Cards & UI ============ */
-
-        .card {
-            background: #fff;
-            border: 1px solid #eef1f5;
-            border-radius: var(--radius);
-            padding: 18px;
-            box-shadow: var(--shadow);
-        }
-
-        .icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: inline-grid;
-            place-items: center;
-            background: var(--card);
-            margin-bottom: 10px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        /* Ikony w kartach */
-        .card .icon {
-            width: 96px;
-            /* możesz zmienić np. na 84/112px */
-            height: 96px;
-            margin: 0 auto 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            /* wyłącz tło jeśli było */
-            font-size: 0;
-            /* żeby nie zostawiło odstępu po starym znaku */
-        }
-
-        .card .icon img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            /* zachowaj proporcje PNG */
-            border-radius: 12px;
-            /* opcjonalnie miękkie rogi */
-        }
-
-
-        /* ============ Why / Social / Opinions ============ */
-
-        .why p {
-            color: var(--muted);
-            margin: .4rem 0 0;
-        }
-
-        .feed-note {
-            color: var(--muted);
-            font-size: 14px;
-            margin-top: 8px;
-        }
-
-        .quote {
-            font-style: italic;
-        }
-
-        .stars {
-            color: #f5a623;
-        }
-
-        /* ============ Contact ============ */
-
-        .contact-wrap {
-            display: grid;
-            grid-template-columns: 1fr .9fr;
-            gap: 20px;
-        }
-
-        @media (max-width:840px) {
-            .contact-wrap {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        form input,
-        form textarea {
-            width: 100%;
-            padding: 12px 14px;
-            margin: 6px 0 12px;
-            border: 1px solid #dde3ea;
-            border-radius: 10px;
-            font-family: inherit;
-        }
-
-        form button {
-            background: var(--dark);
-            color: #fff;
-            border: 0;
-            padding: 12px 18px;
-            border-radius: 999px;
-            font-weight: 700;
-        }
-
-        /* ============ Footer ============ */
-
-        footer {
-            background: #0f1320;
-            color: #cfd6e6;
-            padding-block: 26px;
-            margin-top: 30px;
-        }
-
-        footer a {
-            color: #cfd6e6;
-        }
-
-        /* ============ Motion preference ============ */
-
-        @media (prefers-reduced-motion:reduce) {
-            .hero .scroll-cue svg {
-                animation: none;
-            }
-
-            html {
-                scroll-behavior: auto;
             }
         }
     </style>
