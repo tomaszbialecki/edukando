@@ -37,6 +37,12 @@
             --cue-icon: 32px;
         }
 
+        html,
+        body {
+            overflow-anchor: none;
+            /* wyłącz próby trzymania pozycji przy doskakującym kontencie */
+        }
+
         body {
             visibility: hidden;
             opacity: 0;
@@ -644,6 +650,11 @@
             }
         }
     </style>
+    <script>
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        // Wymuś top jak najwcześniej (przed pierwszym paintem)
+        window.scrollTo(0, 0);
+    </script>
 
 <body>
     <div id="fb-root"></div>
@@ -878,84 +889,47 @@
         document.getElementById('y').textContent = new Date().getFullYear();
     </script>
     <script>
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-
         let sections = [];
         let endSentinel = null;
 
         function findNearestSection() {
             if (!sections.length) return 0;
             const y = window.scrollY;
-            let closest = 0,
-                min = Math.abs(y - sections[0].offsetTop);
+            let closest = 0, min = Math.abs(y - sections[0].offsetTop);
             for (let i = 1; i < sections.length; i++) {
                 const d = Math.abs(y - sections[i].offsetTop);
-                if (d < min) {
-                    min = d;
-                    closest = i;
-                }
+                if (d < min) { min = d; closest = i; }
             }
             return closest;
         }
 
         function scrollToBottom() {
-            window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
         }
 
         function goToSection(index) {
             if (!sections.length) return;
             if (index < 0) index = 0;
             if (index >= sections.length) index = sections.length - 1;
-
-            // ostatni „punkt” = sam dół strony
-            if (index === sections.length - 1) {
-                scrollToBottom();
-                return;
-            }
-
-            // normalne sekcje
-            sections[index].scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            if (index === sections.length - 1) { scrollToBottom(); return; }
+            sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         document.addEventListener('keydown', (e) => {
-            // nie reaguj gdy piszemy w polach formularza lub gdy fokus jest w iframe (np. mapa)
             if (['INPUT', 'TEXTAREA', 'SELECT', 'IFRAME'].includes(e.target.tagName)) return;
-
             switch (e.code) {
-                case 'Space':
-                    e.preventDefault();
-                    goToSection(findNearestSection() + (e.shiftKey ? -1 : +1));
-                    break;
-                case 'PageUp':
-                    e.preventDefault();
-                    goToSection(findNearestSection() - 1);
-                    break;
-                case 'PageDown':
-                    e.preventDefault();
-                    goToSection(findNearestSection() + 1);
-                    break;
-                case 'Home':
-                    e.preventDefault();
-                    goToSection(0);
-                    break;
-                case 'End':
-                    e.preventDefault();
-                    goToSection(sections.length - 1);
-                    break;
+                case 'Space': e.preventDefault(); goToSection(findNearestSection() + (e.shiftKey ? -1 : +1)); break;
+                case 'PageUp': e.preventDefault(); goToSection(findNearestSection() - 1); break;
+                case 'PageDown': e.preventDefault(); goToSection(findNearestSection() + 1); break;
+                case 'Home': e.preventDefault(); goToSection(0); break;
+                case 'End': e.preventDefault(); goToSection(sections.length - 1); break;
             }
         });
 
-        window.addEventListener('load', () => {
-            window.scrollTo(0, 0);
+        // było: window.addEventListener('load', ...)
+        document.addEventListener('DOMContentLoaded', () => {
             sections = Array.from(document.querySelectorAll('main section'));
 
-            // dodaj „wartownik” za footerem jako ostatni punkt nawigacji
             const footer = document.querySelector('footer');
             endSentinel = document.createElement('div');
             endSentinel.id = 'end-sentinel';
@@ -966,6 +940,7 @@
             console.log('Loaded sections (with end):', sections.length);
         });
     </script>
+
 
     <script>
         document.getElementById("contact-form").addEventListener("submit", function (e) {
