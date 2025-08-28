@@ -802,6 +802,8 @@
 
                             <button type="submit">Wyślij</button>
                         </form>
+                        <small>Po kliknięciu otworzy się Twój e-mail – wystarczy kliknąć "Wyślij".</small>
+
                     </div>
 
                     <div class="card">
@@ -950,25 +952,35 @@
     document.getElementById("contact-form").addEventListener("submit", function (e) {
       e.preventDefault();
   
-      const honeypot = document.querySelector('input[name="website"]');
-      if (honeypot.value !== "") return; // spam-bot wyjebany
+      const form = e.target;
   
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const message = document.getElementById("message").value.trim();
+      // Pobieranie i czyszczenie danych z formularza
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const message = form.message.value.trim();
   
-      const body =
-        `Imię i nazwisko: ${name}%0A` +
-        `Email: ${email}%0A` +
-        `Telefon: ${phone}%0A` +
-        `Wiadomość: ${message}`;
+      // Honeypot – jeśli ktoś wypełni to pole, przerywamy (spam)
+      if (form.website.value !== "") return;
   
-      const mailtoLink = `mailto:tomaszmbia@gmail.com?subject=Nowe zgłoszenie&body=${encodeURIComponent(body)}`;
+      // Budujemy wiadomość z normalnymi enterami (\n)
+      const body = `Imię i nazwisko: ${name}\nEmail: ${email}\nTelefon: ${phone}\nWiadomość: ${message}`;
   
+      // Tworzymy link mailto
+      const mailtoLink = `mailto:tomaszmbia@gmail.com?subject=Zgłoszenie z formularza&body=${encodeURIComponent(body)}`;
+  
+      // Otwieramy klienta pocztowego
       window.location.href = mailtoLink;
+  
+      // Czyścimy formularz
+      form.reset();
+  
+      // Pokazujemy komunikat
+      const successMessage = document.getElementById("success-message");
+      successMessage.textContent = "Otworzono wiadomość e-mail. Kliknij 'Wyślij' w swojej aplikacji pocztowej.";
     });
   </script>
+  
   
 
 
