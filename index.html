@@ -948,53 +948,51 @@
         });
     </script>
 
-    <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec";
-        const form = document.getElementById("contact-form");
-        const successMessage = document.getElementById("success-message");
+<script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec";
+    const form = document.getElementById("contact-form");
+    const successMessage = document.getElementById("success-message");
 
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-            if (form.website.value !== "") return;
+        if (form.website.value !== "") return;
 
-            const submitBtn = form.querySelector("button[type='submit']");
-            submitBtn.disabled = true;
-            submitBtn.textContent = "Wysyłanie...";
+        const submitBtn = form.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Wysyłanie...";
 
-            const formData = new FormData(form);
+        const formData = new FormData(form);
 
-            fetch(scriptURL, {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.text())
-                .then(text => {
-                    if (!text) {
-                        successMessage.textContent = "Wiadomość została wysłana! (brak odpowiedzi, ale dane zapisane)";
-                        form.reset();
-                        return;
-                    }
+        fetch(scriptURL, {
+            method: "POST",
+            body: formData
+        })
+        .then(async response => {
+            const text = await response.text(); // Pobierz jako tekst
+            try {
+                const data = JSON.parse(text); // Spróbuj sparsować jako JSON
+                if (data.success) {
+                    successMessage.textContent = "Wiadomość została wysłana!";
+                    form.reset();
+                } else {
+                    successMessage.textContent = "Wystąpił błąd: " + (data.error || "nieznany błąd.");
+                }
+            } catch (err) {
+                successMessage.textContent = "Błąd odpowiedzi serwera.";
+                console.error("Błąd parsowania:", text);
+            }
+        })
+        .catch(() => {
+            successMessage.textContent = "Błąd połączenia. Sprawdź internet.";
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Wyślij";
+        });
+    });
+</script>
 
-                    try {
-                        const data = JSON.parse(text);
-
-                        if (data.success) {
-                            successMessage.textContent = "Wiadomość została wysłana!";
-                            form.reset();
-                        } else if (data.duplicate) {
-                            successMessage.textContent = "Ta wiadomość została już wysłana.";
-                        } else {
-                            successMessage.textContent = "Nieoczekiwany błąd. Spróbuj ponownie.";
-                        }
-                    } catch (err) {
-                        console.error("Błąd parsowania JSON:", err);
-                        successMessage.textContent = "Dane wysłane, ale odpowiedź była uszkodzona.";
-                        form.reset(); // jeśli chcesz zachować reset mimo błędu JSON
-                    }
-                })
-
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
