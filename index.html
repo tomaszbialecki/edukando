@@ -948,46 +948,52 @@
         });
     </script>
 
-    <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec"; // <-- Twój adres z Apps Script
-        const form = document.getElementById("contact-form");
-        const successMessage = document.getElementById("success-message");
+<script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec"; // <-- Twój adres z Apps Script
+    const form = document.getElementById("contact-form");
+    const successMessage = document.getElementById("success-message");
 
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-            if (form.website.value !== "") return;
+        if (form.website.value !== "") return;
 
-            const submitBtn = form.querySelector("button[type='submit']");
-            submitBtn.disabled = true;
-            submitBtn.textContent = "Wysyłanie...";
+        const submitBtn = form.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Wysyłanie...";
 
-            const formData = new FormData(form);
+        const formData = new FormData(form);
 
-            fetch(scriptURL, {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json()) // << TU CZYTASZ JSON z backendu
-                .then(data => {
+        fetch(scriptURL, {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.text())
+            .then(text => {
+                try {
+                    const data = JSON.parse(text);
                     if (data.duplicate) {
                         successMessage.textContent = "Ta wiadomość została już wysłana.";
-                    } else {
+                    } else if (data.success) {
                         successMessage.textContent = "Wiadomość została wysłana!";
                         form.reset();
+                    } else {
+                        successMessage.textContent = "Błąd. Spróbuj ponownie.";
                     }
-                })
-                .catch(() => {
-                    successMessage.textContent = "Błąd. Spróbuj ponownie.";
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "Wyślij";
-                });
-        });
+                } catch (err) {
+                    successMessage.textContent = "Błąd przetwarzania odpowiedzi.";
+                }
+            })
+            .catch(() => {
+                successMessage.textContent = "Błąd połączenia. Spróbuj ponownie.";
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Wyślij";
+            });
+    });
+</script>
 
-
-    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById('privacy-modal');
