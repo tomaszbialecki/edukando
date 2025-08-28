@@ -949,7 +949,7 @@
     </script>
 
 <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec"; // <-- Twój adres z Apps Script
+    const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec";
     const form = document.getElementById("contact-form");
     const successMessage = document.getElementById("success-message");
 
@@ -972,20 +972,24 @@
             .then(text => {
                 try {
                     const data = JSON.parse(text);
-                    if (data.duplicate) {
-                        successMessage.textContent = "Ta wiadomość została już wysłana.";
-                    } else if (data.success) {
+
+                    if (data.success) {
                         successMessage.textContent = "Wiadomość została wysłana!";
                         form.reset();
+                    } else if (data.duplicate) {
+                        successMessage.textContent = "Ta wiadomość została już wysłana.";
                     } else {
-                        successMessage.textContent = "Błąd. Spróbuj ponownie.";
+                        successMessage.textContent = "Nieoczekiwany błąd. Spróbuj ponownie.";
                     }
+
                 } catch (err) {
-                    successMessage.textContent = "Błąd przetwarzania odpowiedzi.";
+                    console.error("Błąd parsowania JSON:", err);
+                    successMessage.textContent = "Błąd po stronie serwera. Spróbuj później.";
                 }
             })
-            .catch(() => {
-                successMessage.textContent = "Błąd połączenia. Spróbuj ponownie.";
+            .catch(err => {
+                console.error("Fetch error:", err);
+                successMessage.textContent = "Błąd połączenia. Sprawdź internet.";
             })
             .finally(() => {
                 submitBtn.disabled = false;
