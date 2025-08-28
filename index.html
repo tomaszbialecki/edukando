@@ -805,27 +805,22 @@
                     </div>
 
                     <div class="card">
-                        <!-- zostawiasz jak było -->
+                        <h3>Kontakt</h3>
+                        <p><strong>Telefon:</strong> <a href="tel:+48123456789">+48 667 111 311</a></p>
+                        <p><strong>E-mail:</strong> <a href="mailto:kontakt@edukando.pl">edukando.swarzedz@gmail.com</a>
+                        </p>
+                        <p><strong>Adres:</strong> os. Mielżyńskiego 137/2 Swarzedz, Poland</p>
+                        <div style="margin-top:10px;overflow:hidden;border-radius:12px">
+                            <!-- TODO: podmień osadzenie mapy -->
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.4626539911733!2d17.06107384127473!3d52.398290745349605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47045947b74ead6f%3A0x3bbf1f6e9ac0beb8!2sOsiedle%20Miel%C5%BCy%C5%84skiego%20137%2F2%2C%2062-020%20Swarz%C4%99dz!5e0!3m2!1spl!2spl!4v1756146528810!5m2!1spl!2spl"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        <h3>Kontakt</h3>
-        <p><strong>Telefon:</strong> <a href="tel:+48123456789">+48 667 111 311</a></p>
-        <p><strong>E-mail:</strong> <a href="mailto:kontakt@edukando.pl">edukando.swarzedz@gmail.com</a>
-        </p>
-        <p><strong>Adres:</strong> os. Mielżyńskiego 137/2 Swarzedz, Poland</p>
-        <div style="margin-top:10px;overflow:hidden;border-radius:12px">
-            <!-- TODO: podmień osadzenie mapy -->
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.4626539911733!2d17.06107384127473!3d52.398290745349605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47045947b74ead6f%3A0x3bbf1f6e9ac0beb8!2sOsiedle%20Miel%C5%BCy%C5%84skiego%20137%2F2%2C%2062-020%20Swarz%C4%99dz!5e0!3m2!1spl!2spl!4v1756146528810!5m2!1spl!2spl"
-                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-        </div>
-        </div>
-        </div>
         </section>
     </main>
 
@@ -1020,29 +1015,6 @@
         });
     </script>
 
-    <script>
-        document.getElementById("contact-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const honeypot = document.querySelector('input[name="website"]');
-            if (honeypot.value !== "") return; // spam-bot wyjebany
-
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const message = document.getElementById("message").value.trim();
-
-            const body =
-                `Imię i nazwisko: ${name}%0A` +
-                `Email: ${email}%0A` +
-                `Telefon: ${phone}%0A` +
-                `Wiadomość: ${message}`;
-
-            const mailtoLink = `mailto:tomaszmbia@gmail.com?subject=Nowe zgłoszenie&body=${encodeURIComponent(body)}`;
-
-            window.location.href = mailtoLink;
-        });
-    </script>
 
 </body>
 
