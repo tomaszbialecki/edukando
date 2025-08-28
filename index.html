@@ -12,6 +12,153 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ============ Tokens & global ============ */
+
+        :root {
+            --primary: #0fb9b1;
+            /* turkus */
+            --accent: #f7b731;
+            /* żółty */
+            --dark: #0c1b33;
+            /* granat */
+            --text: #222;
+            --muted: #666;
+            --bg: #ffffff;
+            --card: #f7f9fc;
+            --radius: 16px;
+            --shadow: 0 6px 20px rgba(0, 0, 0, .08);
+            --nav-h: 88px;
+            /* wysokość sticky headera (dopasuj do realnej) */
+            /* strzałka (scroll cue) – desktop */
+            --cue-size: 64px;
+            --cue-icon: 32px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Poppins, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+            /* anty poziomy scroll */
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* offset kotwic pod sticky header */
+
+        main section {
+            scroll-margin-top: calc(var(--nav-h) + 16px);
+        }
+
+        /* kontener */
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding-inline: 12px;
+        }
+
+        /* ============ Header / Nav ============ */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: #fff;
+            border-bottom: 1px solid #eef1f5;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--nav-h);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--dark);
+        }
+
+        .brand img {
+            height: calc(var(--nav-h) - 24px);
+        }
+
+        /* logo dopasowane do paska */
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .mobile-toggle {
+            display: none;
+        }
+
+        @media (max-width:840px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                position: absolute;
+                top: var(--nav-h);
+                left: 0;
+                width: 100%;
+                background: #fff;
+                padding: 12px 20px;
+                border-top: 1px solid #eef1f5;
+            }
+
+            .mobile-toggle {
+                display: block;
+                border: 0;
+                background: transparent;
+                font-size: 28px;
+            }
+
+            body.no-scroll {
+                overflow: hidden;
+            }
+
+            /* gdy otwarte mobilne menu */
+        }
+
+        /* ============ Hero ============ */
+
         /* =========================
    VARIABLES (zostaw jak masz w :root)
    ========================= */
@@ -270,6 +417,134 @@
             .grid-3,
             .grid-4 {
                 grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* ============ Cards & UI ============ */
+
+        .card {
+            background: #fff;
+            border: 1px solid #eef1f5;
+            border-radius: var(--radius);
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: inline-grid;
+            place-items: center;
+            background: var(--card);
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Ikony w kartach */
+        .card .icon {
+            width: 96px;
+            /* możesz zmienić np. na 84/112px */
+            height: 96px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            /* wyłącz tło jeśli było */
+            font-size: 0;
+            /* żeby nie zostawiło odstępu po starym znaku */
+        }
+
+        .card .icon img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* zachowaj proporcje PNG */
+            border-radius: 12px;
+            /* opcjonalnie miękkie rogi */
+        }
+
+
+        /* ============ Why / Social / Opinions ============ */
+
+        .why p {
+            color: var(--muted);
+            margin: .4rem 0 0;
+        }
+
+        .feed-note {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .quote {
+            font-style: italic;
+        }
+
+        .stars {
+            color: #f5a623;
+        }
+
+        /* ============ Contact ============ */
+
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr .9fr;
+            gap: 20px;
+        }
+
+        @media (max-width:840px) {
+            .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            margin: 6px 0 12px;
+            border: 1px solid #dde3ea;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+
+        form button {
+            background: var(--dark);
+            color: #fff;
+            border: 0;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        /* ============ Footer ============ */
+
+        footer {
+            background: #0f1320;
+            color: #cfd6e6;
+            padding-block: 26px;
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: #cfd6e6;
+        }
+
+        /* ============ Motion preference ============ */
+
+        @media (prefers-reduced-motion:reduce) {
+            .hero .scroll-cue svg {
+                animation: none;
+            }
+
+            html {
+                scroll-behavior: auto;
             }
         }
     </style>
