@@ -651,10 +651,28 @@
         }
     </style>
     <script>
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        // Wymuś top jak najwcześniej (przed pierwszym paintem)
-        window.scrollTo(0, 0);
+        // 1. Usuń hash, jeśli jakiś jest (np. po kliknięciu w #oferta wcześniej)
+        if (location.hash) {
+            history.replaceState(null, null, location.pathname);
+        }
+
+        // 2. Wyłącz domyślne przywracanie pozycji scrolla przez przeglądarkę
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // 3. Wymuszaj scrollTo(0, 0) wielokrotnie (na wypadek spóźnionego layoutu, obrazków, fontów itp.)
+        let tries = 0;
+        const forceTop = setInterval(() => {
+            if (window.scrollY > 10 && tries < 10) {
+                window.scrollTo(0, 0);
+                tries++;
+            } else {
+                clearInterval(forceTop);
+            }
+        }, 100);
     </script>
+
 
 <body>
 
