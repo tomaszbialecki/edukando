@@ -946,47 +946,30 @@
         });
     </script>
 
-    <script>
-        const scriptURL = "https://script.google.com/macros/s/AKfycby_J7CB5vPsBgQqi2BzSbljDGSieIgfI0ZNFiFjd00Pd7lJUhjTeSqot0fZBftgYVtq/exec";
-        const form = document.getElementById("contact-form");
-        const successMessage = document.getElementById("success-message");
-
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            if (form.website.value !== "") return;
-
-            const submitBtn = form.querySelector("button[type='submit']");
-            submitBtn.disabled = true;
-            submitBtn.textContent = "Wysyłanie...";
-
-            const data = new URLSearchParams(new FormData(form));
-
-            fetch(scriptURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: data
-            })
-
-                .then(response => {
-                    if (response.ok) {
-                        successMessage.textContent = "Wiadomość została wysłana!";
-                        form.reset();
-                    } else {
-                        successMessage.textContent = "Wysłano, ale brak potwierdzenia (CORS).";
-                    }
-                })
-                .catch(() => {
-                    successMessage.textContent = "Błąd. Spróbuj ponownie.";
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "Wyślij";
-                });
-        });
-
+<script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const honeypot = document.querySelector('input[name="website"]');
+      if (honeypot.value !== "") return; // spam-bot wyjebany
+  
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.getElementById("message").value.trim();
+  
+      const body =
+        `Imię i nazwisko: ${name}%0A` +
+        `Email: ${email}%0A` +
+        `Telefon: ${phone}%0A` +
+        `Wiadomość: ${message}`;
+  
+      const mailtoLink = `mailto:tomaszmbia@gmail.com?subject=Nowe zgłoszenie&body=${encodeURIComponent(body)}`;
+  
+      window.location.href = mailtoLink;
+    });
+  </script>
+  
 
 
 
