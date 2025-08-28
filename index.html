@@ -957,7 +957,6 @@
 
             if (form.website.value !== "") return;
 
-            // Blokujemy przycisk i pokazujemy "ładowanie"
             const submitBtn = form.querySelector("button[type='submit']");
             submitBtn.disabled = true;
             submitBtn.textContent = "Wysyłanie...";
@@ -968,18 +967,26 @@
                 method: "POST",
                 body: formData
             })
-                .then(() => {
-                    successMessage.textContent = "Wiadomość została wysłana!";
-                    form.reset();
+                .then(response => {
+                    // Jeżeli odpowiedź ma status 200, uznajemy że jest OK – nawet jak CORS ją blokuje
+                    if (response.ok) {
+                        successMessage.textContent = "Wiadomość została wysłana!";
+                        form.reset();
+                    } else {
+                        successMessage.textContent = "Wysłano, ale serwer nie odpowiedział poprawnie (CORS).";
+                        console.warn("Problem CORS, ale fetch się udał:", response);
+                    }
                 })
-                .catch(() => {
-                    successMessage.textContent = "Błąd. Spróbuj ponownie.";
+                .catch((error) => {
+                    successMessage.textContent = "Błąd połączenia. Spróbuj ponownie.";
+                    console.error("Fetch error:", error);
                 })
                 .finally(() => {
                     submitBtn.disabled = false;
                     submitBtn.textContent = "Wyślij";
                 });
         });
+
 
 
 
