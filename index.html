@@ -962,12 +962,16 @@
             submitBtn.disabled = true;
             submitBtn.textContent = "Wysyłanie...";
 
-            const formData = new FormData(form);
+            const data = new URLSearchParams(new FormData(form));
 
             fetch(scriptURL, {
                 method: "POST",
-                body: formData
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: data
             })
+
                 .then(response => {
                     if (response.ok) {
                         successMessage.textContent = "Wiadomość została wysłana!";
