@@ -535,10 +535,6 @@
             font-style: italic;
         }
 
-        .stars {
-            color: #f5a623;
-        }
-
         /* ============ Contact ============ */
 
         .contact-wrap {
@@ -798,24 +794,7 @@
         <section id="opinie">
             <div class="container">
                 <h2 class="section-title">Opinie rodziców</h2>
-                <div class="grid grid-3">
-                    <div class="card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote">„Świetna atmosfera, córka nie może się doczekać kolejnych zajęć!”</p>
-                        <p>— Anna K.</p>
-                    </div>
-                    <div class="card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote">„Zauważalny progres z matematyki już po kilku tygodniach.”</p>
-                        <p>— Michał P.</p>
-                    </div>
-                    <div class="card">
-                        <div class="stars">★★★★★</div>
-                        <p class="quote">„Półkolonie pełne atrakcji i spokoju o opiekę.”</p>
-                        <p>— Karolina Z.</p>
-                    </div>
-                </div>
-                <!-- Alternatywnie tu można wkleić oficjalny widget recenzji FB -->
+                <div class="grid grid-3" id="opinie-list"></div>
             </div>
         </section>
 
@@ -998,6 +977,65 @@
             });
         });
     </script>
+    <script>
+        // ========== 1) DANE ==========
+        // użyje istniejącej window.opinie jeśli jest; w przeciwnym razie tworzy własną
+        window.opinie = Array.isArray(window.opinie) && window.opinie.length ? window.opinie : [
+            { autor: "Marta M.", tekst: "Cudowne miejsce dla dzieci 😊 Super zorganizowany czas, nie ma szans na nudę 😊 dodatkowo opiekunowie super przeplatają naukę z zabawą 😊 Chłopaki zawsze wracają z uśmiechem i czekają na kolejne warsztaty 😊" },
+            { autor: "Magdalena K.", tekst: "Miejsce w którym zabawa spotyka się z nauką. Dzieci czują się dobrze i zawsze są mile widziane. Uśmiech nie schodził z twarzy – zarówno prowadzącym, jak i dzieciom. Tworzą je wspaniali ludzie pełni pasji." },
+            { autor: "Sylwia Ł.", tekst: "Bardzo polecam Edukando! Wszystkie warsztaty są bardzo ciekawe, nie są to sztampowe zajęcia. Panuje tu naprawdę ciepła, rodzinna atmosfera. Kto raz przyjdzie – na pewno wróci 🥰" },
+            { autor: "Maja S.", tekst: "Przewspaniałe miejsce! Warsztaty bardzo ciekawe! Animatorzy cudowni, wszystko dopięte perfekcyjnie. Nawet kartonik od tortu był tematyczny! Najbardziej wymagające osoby będą usatysfakcjonowane ❤️" },
+            { autor: "Lidia K.", tekst: "Polecamy Edukando. Organizowaliśmy tam urodzinki. Wszystkie dzieci zadowolone. Panie animatorki bardzo miłe i zaangażowane👌 Córka już planuje tam kolejną imprezkę🙈" },
+            { autor: "Joanna B.", tekst: "Świetny kontakt, super organizacja, ciekawe zajęcia, przemiła atmosfera i co najważniejsze – zadowolenie dzieci 🥰 Polecam wszystkim niezdecydowanym!" },
+            { autor: "Adam P.", tekst: "Super przygotowanie i mega przyjemne podejście do dzieci 😉 wszystkim dzieciom no i solenizantowi baaaardzo się podobało ;-)" },
+            { autor: "Adriana H.", tekst: "Edukando to miejsce gdzie dzieci mogą fajnie spędzić czas i zdobywać nowe umiejętności. Profesjonalna kadra zapewnia opiekę i rozrywkę. Mój syn zachwycony warsztatami naukowymi. Polecam!" },
+            { autor: "Ania K.", tekst: "Cudowne miejsce tworzone z pasją i sercem. Polecam na urodzinki i półkolonie. Dzieci zachwycone 🙂 Podejście kadry i pomysły na spędzanie czasu na 6!" },
+            { autor: "Joanna S.", tekst: "Super organizacja urodzin 🙂 Dzieciaki świetnie się bawią. Panie animatorki mają świetne podejście. Mała sala, ale wielkie możliwości. Dziękujemy 😘" },
+            { autor: "Paulina B.", tekst: "Super miejsce na urodziny! Dzieci zadowolone z jednorożcowego przyjęcia 😊 Organizatorzy cierpliwi i pomocni 🥰 Polecam!" },
+            { autor: "Lenamagda M.", tekst: "Półkolonie to był super wybór. Dzieci chętnie wstawały rano, ciekawy program, świetni opiekunowie. Jedzenie smaczne. Czekamy na kolejne edycje 😁" },
+            { autor: "Jacek S.", tekst: "Nasza córka kolejny raz uczestniczyła w półkoloniach i jak zawsze była zachwycona. Zajęcia ciekawe, opiekunowie zaangażowani. Dziękujemy i pozdrawiamy!" },
+            { autor: "Kinga N.", tekst: "Syn wracał codziennie zadowolony. Zabawa, gry, wyjścia, opiekunowie cudowni. Posiłki dobre, owoce dostępne cały dzień. Atmosfera ciepła i bezpieczna. Tydzień z Edukando to był hit!" },
+            { autor: "Dorota Z.", tekst: "Syn kolejny raz uczestniczył w półkoloniach – tym razem zimowych. Każdego dnia chętnie wstawał rano. Czas wypełniony zabawą, opieka super 👍" },
+            { autor: "Damian M.", tekst: "Córka była zachwycona zajęciami. Czekamy na następne półkolonie. Bardzo polecam!" },
+            { autor: "Marta I.", tekst: "Polecam półkolonie w Edukando – bogaty program i profesjonalna opieka. Córka wracała każdego dnia zachwycona." },
+            { autor: "Asia W.", tekst: "Serdecznie polecam półkolonie w Edukando! Syn wrócił zachwycony. Oferta różnorodna, świetna kadra, bezpieczeństwo, zgłoszenie do kuratorium – to się ceni!" },
+            { autor: "Ewelina S.", tekst: "Półkolonie zorganizowane na najwyższym poziomie. Świetne wycieczki, zaangażowani opiekunowie, dużo radości i ciepła. Córka codziennie wracała pełna entuzjazmu. Zdecydowanie wrócimy! 😉" }
+        ];
+
+        // ========== 2) RENDER ==========
+
+        function losuj3(arr) {
+            // kopia + losowanie bez modyfikacji oryginału
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a.slice(0, 3);
+        }
+
+        function renderOpinie() {
+            const host = document.getElementById('opinie-list');
+            if (!host) return;
+
+            host.innerHTML = ''; // na wszelki wypadek
+
+            const wybrane = losuj3(window.opinie);
+
+            wybrane.forEach(({ autor, tekst }) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+              <p class="quote">„${tekst.replace(/"/g, '&quot;')}”</p>
+              <p>— ${autor}</p>
+            `;
+                host.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderOpinie);
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => {
